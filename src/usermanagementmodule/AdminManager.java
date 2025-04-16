@@ -21,6 +21,7 @@ public class AdminManager {
    public void showAdminMenu(Scanner input){
        boolean adminActive = true;
        while (adminActive){
+           //Edit menu UI when you guys plug in your functions
            System.out.println("\n=== Admin Menu ===");
             System.out.println("1. Add Staff");
             System.out.println("2. View Staff");
@@ -28,7 +29,7 @@ public class AdminManager {
             System.out.println("4. Logout");
             System.out.print("Enter choice: ");
             int choice = input.nextInt();
-            input.nextLine(); // clear buffer
+            input.nextLine(); 
 
             switch (choice) {
                 case 1:
@@ -82,7 +83,7 @@ public class AdminManager {
         for (int i = 0; i < staffCount; i++) {
             if (staffList[i].getUsername().equals(username)) {
                 found = true;
-                // Shift remaining staff
+                // Shift staff array to cover hole
                 for (int j = i; j < staffCount - 1; j++) {
                     staffList[j] = staffList[j + 1];
                 }

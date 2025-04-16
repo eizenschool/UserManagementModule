@@ -14,6 +14,11 @@ public class UserManagementModule {
         
         StaffUser[] staffList = new StaffUser[50];
         int staffCount = 0;
+        
+        MemberUser[] memberList = new MemberUser[50];
+        int memberCount = 0;
+        
+        //Program State = running
         boolean running = true;
         
         while(running){
@@ -27,7 +32,7 @@ public class UserManagementModule {
             
             switch(choice){
                 case 1:
-                    //Handle Admin login
+                    //Admin Login Logic
                     input.nextLine();
                     System.out.print("Enter admin username: ");
                     String adminUser = input.nextLine();
@@ -44,8 +49,69 @@ public class UserManagementModule {
                     }
                     break;
                 case 2: 
-                    //Handle Staff login
-                    break;
+                    //Staff Login Logic
+                    input.nextLine();
+                    
+                    System.out.print("Enter staff username: ");
+                    String staffUsername = input.nextLine();
+                    
+                    System.out.print("Enter staff password: ");
+                    String staffPassword = input.nextLine();
+                    
+                    boolean found = false;
+                    StaffUser loggedInStaff = null;
+                    
+                    for(int i=0; i < staffCount; i++){
+                        if(staffList[i].getUsername().equals(staffUsername)&& staffList[i].checkPassword(staffPassword)){
+                            found = true;
+                            loggedInStaff = staffList[i];
+                            break;
+                        }
+                    }
+                    //On succesful staff login
+                    if(found){
+                        System.out.println("Login successful! Welcome, " + loggedInStaff.getUsername());
+                        boolean staffActive = true;
+                        MembershipManager membershipManager = new MembershipManager(memberList, memberCount);
+                        
+                        while(staffActive){
+                          System.out.println("\n=== Staff Menu ===");
+                          System.out.println("1. Manage Memberships");
+                          System.out.println("2. Reservation");
+                          System.out.println("3. Purchase");
+                          System.out.println("4. Inventory");
+                          System.out.println("5. Logout");
+                          System.out.print("Enter choice: ");
+                          
+                          int staffChoice = input.nextInt();
+                          input.nextLine();
+                          
+                          switch(staffChoice){
+                              case 1:
+                                  membershipManager.showMemberMenu(input);
+                                  memberCount = membershipManager.getMemberCount();
+                                  break;
+                              case 2:
+                                  System.out.println("Redirecting to Reservation module...");
+                                  break;
+                              case 3:
+                                  System.out.println("Redirecting to Purchase module");
+                                  break;
+                              case 4:
+                                  System.out.println("Redirecting to Inventory Module");
+                                  break;
+                              case 5:
+                                  staffActive = false;
+                                  System.out.println("Logging out of staff account...");
+                                  break;
+                              default:
+                                  System.out.println("Invalid input!");
+                          }
+                        }
+                        
+                    }else{
+                        System.out.println("Invalid staff credentials!\n");
+                    }
                 case 3:
                     running = false;
                     System.out.println("Exiting Program...");
