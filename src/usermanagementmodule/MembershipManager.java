@@ -85,13 +85,13 @@ public class MembershipManager {
          System.out.println("No registered members");
      }else{
          for(int i = 0; i < memberCount; i++){
-             System.out.println((i+1)+ ". " + memberList[i]);
+             System.out.println("Member details:\n" + memberList[i].toString());
          }
      }
  }
  
  public void deleteMember(Scanner input){
-     System.out.print("Enter email of member to delete: ");
+     System.out.print("Enter phone number of member to delete: ");
      String phoneNo = input.nextLine();
      
      boolean found = false;
@@ -116,9 +116,9 @@ public class MembershipManager {
      return memberCount;
  }
  
- public MemberUser findMemberByEmail(String email){
+ public MemberUser findMemberByPhone(String phoneNo){
      for(int i = 0; i < memberCount; i++){
-         if(memberList[i].getPhoneNo().equals(email)){
+         if(memberList[i].getPhoneNo().equals(phoneNo)){
              return memberList[i];
          }
      }
