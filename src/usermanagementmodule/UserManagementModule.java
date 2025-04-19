@@ -34,12 +34,14 @@ public class UserManagementModule {
                 case 1:
                     //Admin Login Logic
                     input.nextLine();
+                    
+                    AdminUser admin = new AdminUser("admin","admin123");
                     System.out.print("Enter admin username: ");
                     String adminUser = input.nextLine();
                     System.out.print("Enter admin password: ");
                     String adminPass = input.nextLine();
                     
-                    if(adminUser.equals("admin")&& adminPass.equals("admin123")){
+                    if(admin.getUsername().equals(adminUser)&& admin.checkPassword(adminPass)){
                      System.out.println("Login successful!\n");
                      AdminManager adminManager = new AdminManager(staffList,staffCount);
                      adminManager.showAdminMenu(input);
@@ -112,14 +114,13 @@ public class UserManagementModule {
                     }else{
                         System.out.println("Invalid staff credentials!\n");
                     }
+                    break;
                 case 3:
                     running = false;
                     System.out.println("Exiting Program...");
                     break;
                 default:
                     System.out.println("Invalid input!");
-            
-            
             }            
     }
   }  

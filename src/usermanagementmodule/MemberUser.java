@@ -10,12 +10,12 @@ package usermanagementmodule;
  */
 public class MemberUser {
     private String name;
-    private String email;
+    private String phoneNo;
     private String membershipType;
     
-    public MemberUser(String name, String email, String membershipType){
+    public MemberUser(String name, String phoneNo, String membershipType){
         this.name = name;
-        this.email = email;
+        this.phoneNo = phoneNo;
         this.membershipType = membershipType;
     }
     
@@ -23,8 +23,8 @@ public class MemberUser {
         return name;
     }
     
-    public String getEmail(){
-        return email;
+    public String getPhoneNo(){
+        return phoneNo;
     }
     
     public String getMembershipType(){
@@ -37,6 +37,6 @@ public class MemberUser {
     
     @Override
     public String toString() {
-        return "Name: " + name + " | Email: " + email + " | Membership: " + membershipType;
+        return "Name: " + name + " | PhoneNo: " + phoneNo + " | Membership: " + membershipType;
     }
 }

@@ -56,26 +56,24 @@ public class MembershipManager {
      System.out.print("Enter member name: ");
      String name = input.nextLine();
      
-     System.out.print("Enter member email: ");
-     String email = input.nextLine();
+     System.out.print("Enter member phone number: ");
+     String phoneNo = input.nextLine();
      
-     System.out.print("Enter membership tier (Silver/Gold/Platinum): ");
-     while(!validTier){
+     do{
          System.out.print("Enter membership tier (Silver/Gold/Platinum): ");
          tier = input.nextLine();
-         
-         if(tier.equalsIgnoreCase("Silver")||
-            tier.equalsIgnoreCase("Gold")||
-            tier.equalsIgnoreCase("Platinum")){
-             validTier = true;
-         } else {
-             System.out.println("Invalid tier. Please enter Silver, Gold, or Platinum.");
+         validTier = tier.equalsIgnoreCase("Silver")||
+                     tier.equalsIgnoreCase("Gold")||
+                     tier.equalsIgnoreCase("Platinum");
+         if(!validTier){
+             System.out.println("Invalid tier. Try again.");
          }
-     }
+     } while (!validTier);
      
      //Link To Payment Here
      
-     memberList[memberCount] = new MemberUser(name,email,tier);
+     tier = tier.toUpperCase();
+     memberList[memberCount] = new MemberUser(name,phoneNo,tier);
      memberCount++;
      
      System.out.println("Member successfully registered!");
@@ -94,11 +92,11 @@ public class MembershipManager {
  
  public void deleteMember(Scanner input){
      System.out.print("Enter email of member to delete: ");
-     String email = input.nextLine();
+     String phoneNo = input.nextLine();
      
      boolean found = false;
      for (int i = 0; i<memberCount; i++){
-         if (memberList[i].getEmail().equals(email)){
+         if (memberList[i].getPhoneNo().equals(phoneNo)){
              found = true;
              //Shift array to cover hole
              for(int j = i; j < memberCount-1; j++){
@@ -120,7 +118,7 @@ public class MembershipManager {
  
  public MemberUser findMemberByEmail(String email){
      for(int i = 0; i < memberCount; i++){
-         if(memberList[i].getEmail().equals(email)){
+         if(memberList[i].getPhoneNo().equals(email)){
              return memberList[i];
          }
      }
